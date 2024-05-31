@@ -1,8 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
 import TodoList from "./todoList";
-
-
-
 
 const Home = () => {
 	return(

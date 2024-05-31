@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const TodoList = () => {
     const [list, setList] = useState([]);
@@ -13,15 +13,6 @@ const TodoList = () => {
         };
         setList([...list, newTodo]);
         setInput("");
-        async function postTodo(){
-            let response = await fetch("https://playground.4geeks.com/todo/todos/mandoromero", {
-                method:"POST",
-                headers: {"Content-type":"application/json"},
-                body:JSON.stringify({label:todo, is_done:"false"})
-            })
-            let data = response.json()
-        }postTodo()
-
     }
     };
 
@@ -29,17 +20,7 @@ const TodoList = () => {
         const newList = list.filter((todo) => todo.id !== id);
         setList(newList);
     };
-    useEffect(() => {
-        async function createUser (){
-            let response = await fetch("https://playground.4geeks.com/todo/users/mandoromero", {
-                method:"POST",
-                headers: {"Content-type":"application/json"}
-            })
-            let data = await response.json()
-        }
-        createUser()
-    }, [])
-    // useEffect(() => {}, [todo])
+
     return (
         <div className="parent">
             <div className="child-1"></div>
@@ -83,3 +64,39 @@ const TodoList = () => {
 };
 
 export default TodoList;
+
+
+
+
+
+
+
+
+
+ //     async function postTodo(){
+    //         let response = await fetch("https://playground.4geeks.com/todo/todos/mando_romero", {
+    //             method:"POST",
+    //             headers: {"Content-type":"application/json"},
+    //             body:JSON.stringify({label:todo, is_done:"false"})
+    //         })
+    //         let data = response.json()
+    //     }postTodo()
+
+     // }
+ 
+
+
+
+
+
+ // useEffect(() => {
+    //     async function createUser (){
+    //         let response = await fetch("https://playground.4geeks.com/todo/users/mandoromero", {
+    //             method:"POST",
+    //             headers: {"Content-type":"application/json"}
+    //         })
+    //         let data = await response.json()
+    //     }
+    //     createUser()
+    // }, [])
+    // useEffect(() => {}, [todo])
