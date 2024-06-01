@@ -1,9 +1,9 @@
-Import React from "react";
+import React { useState } from "react";
 
 
-const Delete= async() => {
+const Delete = async() => {
     try {
-        const res = await fetch('https://playground.4geeks.com/todo/openapi.json/user/{userName}'), {
+        const res = await fetch('https://playground.4geeks.com/todo/openapi.json/api/users{userName}', {
             method: 'DELETE'
         });
         const data = await res.json();
@@ -19,3 +19,6 @@ const Delete= async() => {
         console.log(error);
     }    
 };
+
+
+export default Delete;
