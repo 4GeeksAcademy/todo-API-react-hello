@@ -15,8 +15,9 @@ const TodoList = () => {
         setInput("");
     }
     };
+   
 
-    const deleteTodo = (id) => {
+      const deleteTodo = (id) => {
         const newList = list.filter((todo) => todo.id !== id);
         setList(newList);
     };
@@ -73,15 +74,7 @@ export default TodoList;
 
 
 
- //     async function postTodo(){
-    //         let response = await fetch("https://playground.4geeks.com/todo/todos/mando_romero", {
-    //             method:"POST",
-    //             headers: {"Content-type":"application/json"},
-    //             body:JSON.stringify({label:todo, is_done:"false"})
-    //         })
-    //         let data = response.json()
-    //     }postTodo()
-
+ 
      // }
  
 
