@@ -1,28 +1,27 @@
-import React, { useState } from "react";
+import React from 'react';
 
-
-
-const Put = async() => {
-    try  {
-        const res = await fetch('https://playground.4geeks.com/todo/openapi.json/api/users/id'),
+const Put = async (id, updatedUser) => {
+    try {
+        const res = await fetch(`https://playground.4geeks.com/todo/todos/${id}`, {
             method: 'PUT',
             headers: {
-                'content-Type': 'application/json'
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(newUser)
-    });
-    const data = await res.json();
+            body: JSON.stringify(updatedUser)
+        });
+        const data = await res.json();
 
-    if (!res.ok) {
-        console.log(data.description);
-        return;
+        if (!res.ok) {
+            console.log(data.description);
+            return null;
+        }
+
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.log(error);
+        return null;
     }
-    
-    console.log(data);
-} catch (error) {
-    console.log(error);
-}
-
-
+};
 
 export default Put;

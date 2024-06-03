@@ -1,25 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Get from "./get"
+import Delete from "./delete";
+import Post from "./post";
+import Put from "./put";
+
 
 const TodoList = () => {
     const [list, setList] = useState([]);
     const [input, setInput] = useState("");
 
-    const addTodo = (todo) => {
-        if (todo !== ""){
-        const newTodo = {
-            id: Math.random(),
-            todo: todo,
-        
+    useEffect(() => {
+        const fetchTodos = async () => {
+            const data = await Get();
+            if (Array.isArray(data)) {
+                setList(data);
+            }
         };
-        setList([...list, newTodo]);
-        setInput("");
-    }
-    };
-   
+        fetchTodos();
+    }, []);
 
-      const deleteTodo = (id) => {
-        const newList = list.filter((todo) => todo.id !== id);
-        setList(newList);
+    const addTodo = async (todo) => {
+        if (todo !== "") {
+            const newTodo = { todo };
+            const addedTodo = await Post(newTodo);
+            if (addedTodo) setList([...list, addedTodo]);
+            setInput("");
+        }
+    };
+
+    const updateTodo = async (id, updatedTodo) => {
+        const updated = await Put(id, updatedTodo);
+        if (updated) {
+            setList(list.map(todo => (todo.id === id ? updated : todo)));
+        }
+    };
+
+    const deleteTodo = async (id) => {
+        const deleted = await Delete(id);
+        if (deleted) {
+            setList(list.filter(todo => todo.id !== id));
+        }
     };
 
     return (
@@ -56,7 +76,7 @@ const TodoList = () => {
                         ))}
                     </ul>
                     <div className="counter">
-                        Task:{list.length}
+                        Task: {list.length}
                     </div>
                 </div>
             </div>
