@@ -1,10 +1,12 @@
-import React, {useState} from "react";
-import TodoList from "./todoList";
+import React from "react";
+// import TodoList from "./todoList";
+import ButtonHolder from "./buttonHolder";
+
 
 const Home = () => {
 	return(
 		<div>
-				<TodoList />
+			<ButtonHolder />
 		</div>	
 	)
 };
