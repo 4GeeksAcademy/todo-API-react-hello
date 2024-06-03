@@ -1,12 +1,12 @@
 import React from "react";
-// import TodoList from "./todoList";
-import ButtonHolder from "./buttonHolder";
+import TodoList from "./todoList";
+
 
 
 const Home = () => {
 	return(
 		<div>
-			<ButtonHolder />
+			<TodoList />
 		</div>	
 	)
 };
