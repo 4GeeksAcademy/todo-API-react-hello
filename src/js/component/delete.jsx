@@ -1,22 +1,25 @@
 import React from 'react';
 
-const Delete = async (todoId) => {
+const Delete = async (id) => {
     try {
-        const res = await fetch(`https://playground.4geeks.com/todo/todos/${todoId}`, {
-            method: 'DELETE'
+        const res = await fetch(`https://playground.4geeks.com/todo/todos/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'accept': 'application/json'
+            }
         });
-        const data = await res.json();
 
-        if (!res.ok) {
-            console.log(data.description);
-            return null;
+        if (res.status === 204) {
+            console.log(`Successfully deleted todo with ID ${id}`);
+            return true;
+        } else {
+            const error = await res.json();
+            console.error(`Error deleting todo with ID ${id}:`, error.detail);
+            return false;
         }
-
-        console.log(data);
-        return data;
     } catch (error) {
-        console.log(error);
-        return null;
+        console.error(`Error deleting todo with ID ${id}:`, error);
+        return false;
     }
 };
 

@@ -10,8 +10,8 @@ const Get = async () => {
             return [];
         }
 
-        console.log(data);
-        return data;
+        console.log(data.todos);
+        return data.todos;
     } catch (error) {
         console.log(error);
         return [];
