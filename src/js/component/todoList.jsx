@@ -7,7 +7,6 @@ import Put from "./put";
 const TodoList = () => {
     const [list, setList] = useState([]);
     const [input, setInput] = useState("");
-    const [Todos, setTodos] = useState([])
 
     useEffect(() => {
         const fetchTodos = async () => {
@@ -40,13 +39,12 @@ const TodoList = () => {
     };
 
     const handleDeleteTodo = async (index) => {
-        const todoId = Todos[index].id;
-        if (await deleteTodo(todoId)) {
-          let newTodos = [...Todos];
-          newTodos.splice(index, 1);
-          setTodos(newTodos);
+        const todoId = list[index].id;
+        if (await Delete(todoId)) {
+            const newList = list.filter((todo, i) => i !== index);
+            setList(newList);
         }
-      };
+    };
 
     return (
         <div className="parent">
