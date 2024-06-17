@@ -17,6 +17,7 @@ const TodoList = () => {
             }
         };
         fetchTodos();
+        initializeUser();
     }, []);
 
     const addTodo = async (todo) => {
@@ -31,6 +32,27 @@ const TodoList = () => {
         }
     };
 
+    const initializeUser = async () => {
+        const response = await fetch(`/users/mandoromero`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (response.ok) {
+            const data = await response.json();
+            // Assume the data includes todos
+            setList(data.todos);
+        } else {
+            await fetch(`https://playground.4geeks.com/todo/users/mandoromero`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        }
+    };
+
     const updateTodo = async (id, updatedTodo) => {
         const updated = await Put(id, updatedTodo);
         if (updated) {
@@ -41,7 +63,8 @@ const TodoList = () => {
     const handleDeleteTodo = async (index) => {
         const todoId = list[index].id;
         if (await Delete(todoId)) {
-            const newList = list.filter((todo, i) => i !== index);
+            let newList = [...list];
+            newList.splice(index, 1);
             setList(newList);
         }
     };
@@ -61,7 +84,6 @@ const TodoList = () => {
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && addTodo(input)}
                     />
-
                     <button className="add" onClick={() => addTodo(input)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
